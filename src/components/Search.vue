@@ -3,7 +3,6 @@
     <form id="form0" :action="action" target="_blank">
         <input name="" type=hidden>
         <input ref="input0" type=text :name="name" size=30 class="input" placeholder="search" @focus="inputFocus()" autocomplete="off">
-        <img class="bgbox" id="bgbox" src="../assets/bg.jpg">
         <div class="cover" ref="cover" @click="inputBlur()"></div>
     </form>
     <div id="section" ref="section0">
@@ -71,6 +70,7 @@ export default {
 <style scoped>
 .input {
     position: absolute;
+    z-index: 1;
     top: 200px;
     left: calc(50% - 100px);
     width: 200px;
@@ -149,7 +149,7 @@ textarea::placeholder {
 
 .cover {
     display: none;
-    z-index: -1;
+    z-index: 0;
     position: fixed;
     left: 0;
     top: 0;

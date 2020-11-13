@@ -21,5 +21,19 @@ export default {
 </script>
 
 <style>
+body {
+    padding: 0;
 
+    margin: 0;
+
+    overflow: hidden;
+
+    height: 600px;
+}
+
+canvas {
+    padding: 0;
+
+    margin: 0;
+}
 </style>
