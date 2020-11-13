@@ -29,7 +29,15 @@ export default new Vuex.Store({
   
   state,
   mutations: {
-    
+    addInput(state,input){
+      state.eventInput0 = input
+    },
+    addSection(state,section){
+      state.eventSection0 = section
+    },
+    addCover(state,cover){
+      state.eventCover = cover
+    }
   },
   actions: {
 

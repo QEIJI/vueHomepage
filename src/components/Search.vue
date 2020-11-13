@@ -3,15 +3,19 @@
     <form id="form0" :action="action" target="_blank">
         <input name="" type=hidden>
         <input ref="input0" type=text :name="name" size=30 class="input" placeholder="search" @focus="inputFocus()" autocomplete="off">
-        <div class="cover" ref="cover" @click="inputBlur()"></div>
+        <div class="cover" ref="cover" @click="inputBlur()">
+            <my-content />
+        </div>
     </form>
     <div id="section" ref="section0">
-        <span v-for="(item, index) in list" :key="index" class="sectionBox" :class="{action:currentIndex == index}" @click="checkClick(index)">{{item.name}}</span>
+        <span v-for="(item, index) in list" :key="index" class="sectionBox" :class="{action:currentIndex == index}" @click="checkClick(index)"> <img v-if="currentIndex != index" :src="item.icon" alt=""><img v-else :src="item.activeicon" alt="">{{item.name}}
+        </span>
     </div>
 </div>
 </template>
 
 <script>
+import myContent from './myContent';
 import {
     inputMixin
 } from './Mixin/inputMixin.js'
@@ -21,12 +25,18 @@ export default {
         return {
             list: [{
                     name: "百度",
+                    icon: require("../assets/icon/baidu.svg"),
+                    activeicon: require("../assets/icon/baiduactive.svg")
                 },
                 {
                     name: "必应",
+                    icon: require("../assets/icon/Bing.svg"),
+                    activeicon: require("../assets/icon/Bingactive.svg")
                 },
                 {
                     name: "谷歌",
+                    icon: require("../assets/icon/google.svg"),
+                    activeicon: require("../assets/icon/googleactive.svg")
                 }
             ],
             currentIndex: 0,
@@ -34,12 +44,15 @@ export default {
             name: ""
         }
     },
+    components: {
+        myContent
+    },
     mixins: [inputMixin],
     mounted() {
         //将input0和section0 cover的Dom元素放在vuex
-        this.$store.state.eventInput0 = this.$refs.input0
-        this.$store.state.eventSection0 = this.$refs.section0
-        this.$store.state.eventCover = this.$refs.cover
+        this.$store.commit('addInput', this.$refs.input0)
+        this.$store.commit('addSection', this.$refs.section0)
+        this.$store.commit('addCover', this.$refs.cover)
         this.inputFocus()
         this.action = "https://www.baidu.com/s"
         this.name = "word"
@@ -165,7 +178,7 @@ textarea::placeholder {
     position: absolute;
     top: 220px;
     left: 50%;
-    margin-left: -130px;
+    margin-left: -160px;
     text-align: center;
     transition: all .25s;
 
@@ -176,7 +189,7 @@ textarea::placeholder {
 
 .sectionBox {
     position: relative;
-    padding: 30px;
+    padding: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 18px;
@@ -193,5 +206,14 @@ textarea::placeholder {
     background-color: rgba(255, 255, 255, .3);
     cursor: default;
     color: white;
+}
+
+img {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 4px;
 }
 </style>

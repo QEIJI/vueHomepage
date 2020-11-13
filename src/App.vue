@@ -2,12 +2,14 @@
 <div id="app">
     <TimeInfo></TimeInfo>
     <search></search>
+
 </div>
 </template>
 
 <script>
 import Search from './components/Search';
 import TimeInfo from './components/TimeInfo';
+import myContent from './components/myContent';
 export default {
     name: 'App',
     data() {
@@ -15,7 +17,8 @@ export default {
     },
     components: {
         Search,
-        TimeInfo
+        TimeInfo,
+        myContent
     }
 }
 </script>
